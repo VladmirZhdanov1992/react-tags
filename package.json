@@ -1,47 +1,68 @@
 {
-  "name": "react-tag-autocomplete",
-  "version": "5.0.0",
-  "description": "React Tag Autocomplete is a simple tagging component ready to drop in your React projects.",
-  "main": "dist-es5/ReactTags.js",
-  "jsnext:main": "dist-es6/ReactTags.js",
-  "scripts": {
-    "pretest": "npm run lint && npm run build:es5",
-    "test": "jasmine",
-    "coverage": "istanbul cover -i 'dist-es5/**' jasmine",
-    "lint": "standard lib/*.js spec/*.js",
-    "dev": "webpack-dev-server --progress --colors",
-    "build:example": "webpack -p",
-    "build:es5": "buble lib -o dist-es5",
-    "build:es6": "buble lib -o dist-es6 -t node:6",
-    "prepublish": "npm run build:es5 && npm run build:es6"
+  "_args": [
+    [
+      {
+        "raw": "react-tag-autocomplete",
+        "scope": null,
+        "escapedName": "react-tag-autocomplete",
+        "name": "react-tag-autocomplete",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "/Volumes/650GB/home/iwwant"
+    ]
+  ],
+  "_from": "react-tag-autocomplete@latest",
+  "_id": "react-tag-autocomplete@5.0.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/react-tag-autocomplete",
+  "_nodeVersion": "4.2.0",
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/react-tag-autocomplete-5.0.0.tgz_1471376738758_0.2978875164408237"
   },
-  "files": [
-    "lib",
-    "example",
-    "dist-es5",
-    "dist-es6",
-    "LICENSE",
-    "README.md"
+  "_npmUser": {
+    "name": "i-like-robots",
+    "email": "matt+npm@maketea.co.uk"
+  },
+  "_npmVersion": "2.14.7",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "react-tag-autocomplete",
+    "scope": null,
+    "escapedName": "react-tag-autocomplete",
+    "name": "react-tag-autocomplete",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
   ],
-  "keywords": [
-    "react",
-    "tags",
-    "tag input",
-    "react-component",
-    "autosuggest",
-    "autocomplete"
-  ],
+  "_resolved": "https://registry.npmjs.org/react-tag-autocomplete/-/react-tag-autocomplete-5.0.0.tgz",
+  "_shasum": "761ba685247bfd5937f673b69cdfb860cca34b26",
+  "_shrinkwrap": null,
+  "_spec": "react-tag-autocomplete",
+  "_where": "/Volumes/650GB/home/iwwant",
+  "bugs": {
+    "url": "https://github.com/i-like-robots/react-tags/issues"
+  },
   "contributors": [
-    "Prakhar Srivastav",
-    "Matt Hinchliffe",
-    "Simon Hötten"
+    {
+      "name": "Prakhar Srivastav"
+    },
+    {
+      "name": "Matt Hinchliffe"
+    },
+    {
+      "name": "Simon Hötten"
+    }
   ],
-  "license": "MIT",
-  "repository": "https://github.com/i-like-robots/react-tags",
-  "peerDependencies": {
-    "react": "^0.14.0 || ^15.0.0",
-    "react-dom": "^0.14.0 || ^15.0.0"
-  },
+  "dependencies": {},
+  "description": "React Tag Autocomplete is a simple tagging component ready to drop in your React projects.",
   "devDependencies": {
     "buble": "^0.12.5",
     "buble-loader": "^0.2.2",
@@ -57,5 +78,60 @@
     "standard": "^7.1.2",
     "webpack": "^1.9.4",
     "webpack-dev-server": "^1.8.2"
-  }
+  },
+  "directories": {},
+  "dist": {
+    "shasum": "761ba685247bfd5937f673b69cdfb860cca34b26",
+    "tarball": "https://registry.npmjs.org/react-tag-autocomplete/-/react-tag-autocomplete-5.0.0.tgz"
+  },
+  "files": [
+    "lib",
+    "example",
+    "dist-es5",
+    "dist-es6",
+    "LICENSE",
+    "README.md"
+  ],
+  "gitHead": "0bfdf197f03dee50c0a77b6d6c2a2d9f61ac4352",
+  "homepage": "https://github.com/i-like-robots/react-tags#readme",
+  "jsnext:main": "dist-es6/ReactTags.js",
+  "keywords": [
+    "react",
+    "tags",
+    "tag input",
+    "react-component",
+    "autosuggest",
+    "autocomplete"
+  ],
+  "license": "MIT",
+  "main": "dist-es5/ReactTags.js",
+  "maintainers": [
+    {
+      "name": "i-like-robots",
+      "email": "matt+npm@maketea.co.uk"
+    }
+  ],
+  "name": "react-tag-autocomplete",
+  "optionalDependencies": {},
+  "peerDependencies": {
+    "react": "^0.14.0 || ^15.0.0",
+    "react-dom": "^0.14.0 || ^15.0.0"
+  },
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/i-like-robots/react-tags.git"
+  },
+  "scripts": {
+    "build:es5": "buble lib -o dist-es5",
+    "build:es6": "buble lib -o dist-es6 -t node:6",
+    "build:example": "webpack -p",
+    "coverage": "istanbul cover -i 'dist-es5/**' jasmine",
+    "dev": "webpack-dev-server --progress --colors",
+    "lint": "standard lib/*.js spec/*.js",
+    "prepublish": "npm run build:es5 && npm run build:es6",
+    "pretest": "npm run lint && npm run build:es5",
+    "test": "jasmine"
+  },
+  "version": "5.0.0"
 }

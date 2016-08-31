@@ -1,11 +1,11 @@
 'use strict'
 
-const React = require('react')
-const Tag = require('./Tag')
-const Input = require('./Input')
-const Suggestions = require('./Suggestions')
+var React = require('react')
+var Tag = require('./Tag')
+var Input = require('./Input')
+var Suggestions = require('./Suggestions')
 
-const KEYS = {
+var KEYS = {
   ENTER: 13,
   TAB: 9,
   BACKSPACE: 8,
@@ -13,7 +13,7 @@ const KEYS = {
   DOWN_ARROW: 40
 }
 
-const CLASS_NAMES = {
+var CLASS_NAMES = {
   root: 'react-tags',
   rootFocused: 'is-focused',
   selected: 'react-tags__selected',
@@ -26,9 +26,9 @@ const CLASS_NAMES = {
   suggestionDisabled: 'is-disabled'
 }
 
-class ReactTags extends React.Component {
-  constructor (props) {
-    super(props)
+var ReactTags = (function (superclass) {
+  function ReactTags (props) {
+    superclass.call(this, props)
 
     this.state = {
       query: '',
@@ -39,24 +39,30 @@ class ReactTags extends React.Component {
     }
   }
 
-  componentWillReceiveProps (newProps) {
+  if ( superclass ) ReactTags.__proto__ = superclass;
+  ReactTags.prototype = Object.create( superclass && superclass.prototype );
+  ReactTags.prototype.constructor = ReactTags;
+
+  ReactTags.prototype.componentWillReceiveProps = function componentWillReceiveProps (newProps) {
     this.setState({
       classNames: Object.assign({}, CLASS_NAMES, newProps.classNames)
     })
-  }
+  };
 
-  handleChange (e) {
-    const query = e.target.value
+  ReactTags.prototype.handleChange = function handleChange (e) {
+    var query = e.target.value
 
     if (this.props.handleInputChange) {
       this.props.handleInputChange(query)
     }
 
-    this.setState({ query })
-  }
+    this.setState({ query: query })
+  };
 
-  handleKeyDown (e) {
-    const { query, selectedIndex } = this.state
+  ReactTags.prototype.handleKeyDown = function handleKeyDown (e) {
+    var ref = this.state;
+    var query = ref.query;
+    var selectedIndex = ref.selectedIndex;
 
     // when one of the terminating keys is pressed, add current query to the tags.
     if (e.keyCode === KEYS.ENTER || e.keyCode === KEYS.TAB) {
@@ -64,11 +70,11 @@ class ReactTags extends React.Component {
 
       if (query.length >= this.props.minQueryLength) {
         // Check if the user typed in an existing suggestion.
-        const match = this.suggestions.state.options.findIndex((suggestion) => {
-          return suggestion.name.search(new RegExp(`^${query}$`, 'i')) === 0
+        var match = this.suggestions.state.options.findIndex(function (suggestion) {
+          return suggestion.name.search(new RegExp(("^" + query + "$"), 'i')) === 0
         })
 
-        const index = selectedIndex === -1 ? match : selectedIndex
+        var index = selectedIndex === -1 ? match : selectedIndex
 
         if (index > -1) {
           this.addTag(this.suggestions.state.options[index])
@@ -99,23 +105,23 @@ class ReactTags extends React.Component {
 
       this.setState({ selectedIndex: (selectedIndex + 1) % this.suggestions.state.options.length })
     }
-  }
+  };
 
-  handleClick (e) {
+  ReactTags.prototype.handleClick = function handleClick (e) {
     if (document.activeElement !== e.target) {
       this.input.input.focus()
     }
-  }
+  };
 
-  handleBlur () {
+  ReactTags.prototype.handleBlur = function handleBlur () {
     this.setState({ focused: false, selectedIndex: -1 })
-  }
+  };
 
-  handleFocus () {
+  ReactTags.prototype.handleFocus = function handleFocus () {
     this.setState({ focused: true })
-  }
+  };
 
-  addTag (tag) {
+  ReactTags.prototype.addTag = function addTag (tag) {
     if (tag.disabled) {
       return
     }
@@ -127,58 +133,44 @@ class ReactTags extends React.Component {
       query: '',
       selectedIndex: -1
     })
-  }
+  };
 
-  deleteTag (i) {
+  ReactTags.prototype.deleteTag = function deleteTag (i) {
     this.props.handleDelete(i)
     this.setState({ query: '' })
-  }
+  };
 
-  render () {
-    const listboxId = 'ReactTags-listbox'
+  ReactTags.prototype.render = function render () {
+    var this$1 = this;
 
-    const tags = this.props.tags.map((tag, i) => (
-      <Tag
-        key={i}
-        tag={tag}
-        classNames={this.state.classNames}
-        onDelete={this.deleteTag.bind(this, i)} />
-    ))
+    var listboxId = 'ReactTags-listbox'
 
-    const expandable = this.state.focused && this.state.query.length >= this.props.minQueryLength
-    const classNames = [this.state.classNames.root]
+    var tags = this.props.tags.map(function (tag, i) { return (
+      React.createElement( Tag, {
+        key: i, tag: tag, classNames: this$1.state.classNames, onDelete: this$1.deleteTag.bind(this$1, i) })
+    ); })
+
+    var expandable = this.state.focused && this.state.query.length >= this.props.minQueryLength
+    var classNames = [this.state.classNames.root]
 
     this.state.focused && classNames.push(this.state.classNames.rootFocused)
 
     return (
-      <div className={classNames.join(' ')} onClick={this.handleClick.bind(this)}>
-        <div className={this.state.classNames.selected} aria-live='polite' aria-relevant='additions removals'>
-          {tags}
-        </div>
-        <div
-          className={this.state.classNames.search}
-          onBlur={this.handleBlur.bind(this)}
-          onFocus={this.handleFocus.bind(this)}
-          onChange={this.handleChange.bind(this)}
-          onKeyDown={this.handleKeyDown.bind(this)}>
-          <Input {...this.state}
-            ref={(c) => { this.input = c }}
-            listboxId={listboxId}
-            autofocus={this.props.autofocus}
-            autoresize={this.props.autoresize}
-            expandable={expandable}
-            placeholder={this.props.placeholder} />
-          <Suggestions {...this.state}
-            ref={(c) => { this.suggestions = c }}
-            listboxId={listboxId}
-            expandable={expandable}
-            suggestions={this.props.suggestions}
-            addTag={this.addTag.bind(this)} />
-        </div>
-      </div>
+      React.createElement( 'div', { className: classNames.join(' '), onClick: this.handleClick.bind(this) },
+        React.createElement( 'div', { className: this.state.classNames.selected, 'aria-live': 'polite', 'aria-relevant': 'additions removals' },
+          tags
+        ),
+        React.createElement( 'div', {
+          className: this.state.classNames.search, onBlur: this.handleBlur.bind(this), onFocus: this.handleFocus.bind(this), onChange: this.handleChange.bind(this), onKeyDown: this.handleKeyDown.bind(this) },
+          React.createElement( Input, Object.assign({}, this.state, { ref: function (c) { this$1.input = c }, listboxId: listboxId, autofocus: this.props.autofocus, autoresize: this.props.autoresize, expandable: expandable, placeholder: this.props.placeholder })),
+          React.createElement( Suggestions, Object.assign({}, this.state, { ref: function (c) { this$1.suggestions = c }, listboxId: listboxId, expandable: expandable, suggestions: this.props.suggestions, addTag: this.addTag.bind(this) }))
+        )
+      )
     )
-  }
-}
+  };
+
+  return ReactTags;
+}(React.Component));
 
 ReactTags.defaultProps = {
   tags: [],
