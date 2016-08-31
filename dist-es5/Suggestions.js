@@ -12,7 +12,7 @@ function markIt (input, query) {
 }
 
 function filterSuggestions (query, suggestions, length) {
-  var regex = new RegExp(("\\b" + query), 'i')
+  var regex = new RegExp(("^" + query), 'i')
   return suggestions.filter(function (item) { return regex.test(item.name); }).slice(0, length)
 }
 
